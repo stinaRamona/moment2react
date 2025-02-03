@@ -33,7 +33,7 @@ function TodoList() {
             setTodo(data); 
 
         } catch(error) {
-
+            console.log(error); 
         }
     }
 
@@ -42,7 +42,7 @@ function TodoList() {
         <>
         {
             todos.map((todo) => (
-                <div className="todo-div">
+                <div className="todo-div" key={todo._id}>
                     <h1>{ todo.todo_title }</h1> 
                     <p>{ todo.todo_description }</p>
                     <p>{ todo.todo_status}</p>
