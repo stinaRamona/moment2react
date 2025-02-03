@@ -15,9 +15,40 @@ interface Todo {
 
 
 function TodoList() {
+    //State för Todo
+    const [todos, setTodo] = useState<Todo [] | []>([]); 
+
+    //useEffect 
+    useEffect(() => {
+        getTodos(); 
+    }, []); 
+
+    //funktion för att hämta in todos 
+    const getTodos = async () => {
+        try {
+            const response = await fetch("https://hapitodos.onrender.com/todo"); 
+
+            const data = await response.json(); 
+
+            setTodo(data); 
+
+        } catch(error) {
+
+        }
+    }
+
+
     return(
         <>
-        
+        {
+            todos.map((todo) => (
+                <div className="todo-div">
+                    <h1>{ todo.todo_title }</h1> 
+                    <p>{ todo.todo_description }</p>
+                    <p>{ todo.todo_status}</p>
+                </div>
+            ))
+        }
         </>
     )
 }
