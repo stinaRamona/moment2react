@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function TodoForm() {
 
+    //interface för fomulär
     
     interface FormInterface {
         title: string, 
@@ -11,10 +12,42 @@ function TodoForm() {
         status: string
     };
 
+    //interface för errors
+    interface ErrorInterface {
+        title?: string, 
+        description?: string, 
+        priority?: string
+    }
+
+    // form states
     const [formData, setFormData] = useState<FormInterface>({title: "", description: "", priority: 1, status: "Ej påbörjad"}); 
 
+    //error states 
+    const [formError, setFormErros] = useState<ErrorInterface>({})
+
+    const validateForm = ((data: FormInterface) => {
+        const validationErrors: ErrorInterface = {}; 
+
+        //om inget data skickats med i title
+        if(!data.title) {
+            validationErrors.title = "Du måste ange en todo"
+        }
+
+        if(data.priority > 5) {
+            validationErrors.priority = "Välj en siffra mellan 1-5"
+        }
+
+    })
+
+    //så att sidan inte laddas om automatiskt vid submit
+    const submitForm = ((event: any) => {
+        event.preventDefault(); 
+
+        const validationErrors = validateForm(formData)
+    })
+
     return(
-        <form>
+        <form onSubmit={submitForm}>
             <label htmlFor="title">Todo:</label><br />
             <input type="text" name="title" id="title" value={formData.title}
             onChange={(event) => setFormData({...formData, title: event.target.value})}
