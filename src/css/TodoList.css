@@ -27,3 +27,10 @@ button:hover {
     color: white; 
     cursor: pointer;
 }
+
+#loadingSpinner {
+    max-width: 100%; 
+    width: 30px; 
+    margin: 0 auto; 
+    padding: 1em; 
+}

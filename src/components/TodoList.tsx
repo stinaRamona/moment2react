@@ -17,6 +17,7 @@ interface Todo {
 function TodoList() {
     //State för Todo
     const [todos, setTodo] = useState<Todo [] | []>([]); 
+    const [loading, setLoading] = useState<boolean>(false); 
 
     //useEffect 
     useEffect(() => {
@@ -26,6 +27,8 @@ function TodoList() {
     //funktion för att hämta in todos 
     const getTodos = async () => {
         try {
+            setLoading(true); 
+
             const response = await fetch("https://hapitodos.onrender.com/todo"); 
 
             const data = await response.json(); 
@@ -34,6 +37,8 @@ function TodoList() {
 
         } catch(error) {
             console.log(error); 
+        } finally {
+            setLoading(false); 
         }
     } 
 
@@ -93,6 +98,11 @@ function TodoList() {
 
     return(
         <>
+            <div id="loadingSpinner">
+                {loading && <i className="fa-solid fa-spinner fa-spin-pulse fa-2xl"></i>}
+            </div>
+            
+
         {
             todos.map((todo) => (
                 <div className="todo-div" key={todo._id}>
