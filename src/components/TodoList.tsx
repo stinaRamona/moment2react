@@ -112,7 +112,7 @@ function TodoList() {
 
                     </form>
                     <br />
-                    <button onClick= {() => deleteTodo(todo._id)}>Radera</button>
+                    <button onClick= {() => deleteTodo(todo._id)}>Radera <i className="fa-solid fa-trash"></i></button>
                 </div>
             ))
         }

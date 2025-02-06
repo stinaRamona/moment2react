@@ -14,7 +14,7 @@ function App() {
         <h2>Lägg till en todo</h2>
         <TodoForm />
 
-        <h2>Dina todos</h2>
+        <h2>Dina todos <i className="fa-solid fa-list-check"></i></h2>
         <TodoList /> 
       </main>
 
