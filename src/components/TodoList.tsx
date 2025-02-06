@@ -59,13 +59,17 @@ function TodoList() {
     }
 
     //funktion för att uppdatera todo 
-    const updateTodoStatus = async (e : any, todo : any) => {
+    const updateTodoStatus = async (e : any, todo : Todo) => {
         let updatedStatus = e.target.value; 
 
-        const updatedTodo = {...todo, todo_status: updatedStatus }
+        const updatedTodo = {
+            todo_title: todo.todo_title, 
+            todo_description: todo.todo_description, 
+            todo_priority: todo.todo_priority, 
+            todo_status: updatedStatus
+        }
 
         try {
-
             let response = await fetch("https://hapitodos.onrender.com/todo/" + todo._id, {
                 method: "PUT", 
                 headers: {
@@ -73,11 +77,12 @@ function TodoList() {
                 },
                 body: JSON.stringify(updatedTodo)
             }); 
-
             
             if(!response.ok) {
                 throw new Error("gick inte att uppdatera")
             }
+
+            getTodos(); 
             
 
         } catch(error) {
@@ -93,16 +98,18 @@ function TodoList() {
                 <div className="todo-div" key={todo._id}>
                     <h1>{ todo.todo_title }</h1> 
                     <p>{ todo.todo_description }</p>
+                    <p>{ todo.todo_priority}</p>
                     <p>{ todo.todo_status}</p>
 
                     <form>
                         <label htmlFor="updateStatus">Ändra status</label><br />
-                        <select name="updateStatus" id="updateStatus" defaultValue={todo.todo_status} 
+                        <select name="updateStatus" id="updateStatus" defaultValue={todo.todo_status}
                         onChange={(e) => updateTodoStatus(e, todo)}>
-                            <option value="ej påbörjad">Ej påbörjad</option>
-                            <option value="påbörjad">Påbörjad</option>
-                            <option value="avslutad">Avslutad</option>
+                            <option >Ej påbörjad</option>
+                            <option>Påbörjad</option>
+                            <option>Avslutad</option>
                         </select>
+
                     </form>
                     <button onClick= {() => deleteTodo(todo._id)}>Radera</button>
                 </div>
