@@ -1,0 +1,29 @@
+.todo-div {
+    background-color: rgba(65, 231, 162, 0.281);
+    padding: 1em; 
+    margin-bottom: 1em;
+    border-radius: 5px; 
+}
+
+.todo-div select {
+    max-width: 150px;
+    padding: 0.5em;  
+}
+
+button {
+    background-color: rgb(241, 114, 114); 
+    padding: 0.5em; 
+    font-family: 'Courier New', Courier, monospace;
+    border: 2px solid  rgb(207, 43, 43); 
+    color: rgb(109, 25, 25); 
+    border-radius: 4px; 
+    width: 100%; 
+    max-width: 458px; 
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: rgb(207, 43, 43);
+    color: white; 
+    cursor: pointer;
+}

@@ -1,5 +1,4 @@
 
-import './App.css'
 import TodoList from './components/TodoList'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -9,13 +8,17 @@ function App() {
 
   return (
     <>
-    <Header />
+      <Header />
 
-    <TodoForm />
+      <main>
+        <h2>Lägg till en todo</h2>
+        <TodoForm />
 
-    <TodoList /> 
+        <h2>Dina todos</h2>
+        <TodoList /> 
+      </main>
 
-    <Footer />
+      <Footer />
     </>
   )
 }

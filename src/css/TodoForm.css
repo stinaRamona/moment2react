@@ -1,0 +1,26 @@
+form input, form select {
+    max-width: 500px; 
+    width: 100%; 
+    padding: 1em; 
+    border: 1px solid #c4c4c4; 
+    border-radius: 4px; 
+    box-sizing: border-box;
+}
+
+br {
+    display: block;
+    content: ""; 
+    margin-top: 20px; 
+} 
+
+form input[type="submit"] {
+    background-color: rgb(65, 231, 162);
+    border: 2px solid rgb(56, 187, 132);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+}
+
+form input[type="submit"]:hover {
+    background-color: rgb(56, 187, 132);
+    cursor: pointer;
+}

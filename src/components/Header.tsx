@@ -1,10 +1,11 @@
 // för header 
+import "../css/Header.css"
 
 function Header() {
     return(
-        <>
-        <p>Header</p> 
-        </>
+        <header>
+            <h1>DIN TODO</h1>
+        </header>
     )
 }
 

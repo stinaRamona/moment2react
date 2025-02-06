@@ -1,5 +1,5 @@
 //För inhämtning och utskrivning av todos 
-
+import "../css/TodoList.css"
 import { useState } from "react";
 import { useEffect } from "react"; 
 
@@ -96,7 +96,7 @@ function TodoList() {
         {
             todos.map((todo) => (
                 <div className="todo-div" key={todo._id}>
-                    <h1>{ todo.todo_title }</h1> 
+                    <h3>{ todo.todo_title }</h3> 
                     <p>{ todo.todo_description }</p>
                     <p>{ todo.todo_priority}</p>
                     <p>{ todo.todo_status}</p>
@@ -111,6 +111,7 @@ function TodoList() {
                         </select>
 
                     </form>
+                    <br />
                     <button onClick= {() => deleteTodo(todo._id)}>Radera</button>
                 </div>
             ))
