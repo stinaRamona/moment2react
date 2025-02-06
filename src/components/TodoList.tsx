@@ -7,10 +7,10 @@ import { useEffect } from "react";
 
 interface Todo {
     _id: number,
-    todo_title: String, 
-    todo_description: String, 
-    todo_priority: Number, 
-    todo_status: String
+    todo_title: string, 
+    todo_description: string, 
+    todo_priority: number, 
+    todo_status: string
 }; 
 
 
@@ -58,6 +58,33 @@ function TodoList() {
         }
     }
 
+    //funktion för att uppdatera todo 
+    const updateTodoStatus = async (e : any, todo : any) => {
+        let updatedStatus = e.target.value; 
+
+        const updatedTodo = {...todo, todo_status: updatedStatus }
+
+        try {
+
+            let response = await fetch("https://hapitodos.onrender.com/todo/" + todo._id, {
+                method: "PUT", 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedTodo)
+            }); 
+
+            
+            if(!response.ok) {
+                throw new Error("gick inte att uppdatera")
+            }
+            
+
+        } catch(error) {
+            console.log("något gick fel" + error); 
+        }
+    }
+
 
     return(
         <>
@@ -67,6 +94,16 @@ function TodoList() {
                     <h1>{ todo.todo_title }</h1> 
                     <p>{ todo.todo_description }</p>
                     <p>{ todo.todo_status}</p>
+
+                    <form>
+                        <label htmlFor="updateStatus">Ändra status</label><br />
+                        <select name="updateStatus" id="updateStatus" defaultValue={todo.todo_status} 
+                        onChange={(e) => updateTodoStatus(e, todo)}>
+                            <option value="ej påbörjad">Ej påbörjad</option>
+                            <option value="påbörjad">Påbörjad</option>
+                            <option value="avslutad">Avslutad</option>
+                        </select>
+                    </form>
                     <button onClick= {() => deleteTodo(todo._id)}>Radera</button>
                 </div>
             ))
