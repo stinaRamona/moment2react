@@ -8,7 +8,7 @@ import { useEffect } from "react";
 interface Todo {
     _id: number,
     todo_title: string, 
-    todo_description: string, 
+    todo_description?: string, 
     todo_priority: number, 
     todo_status: string
 }; 

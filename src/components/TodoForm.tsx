@@ -7,7 +7,7 @@ function TodoForm() {
     
     interface FormInterface {
         todo_title: string, 
-        todo_description: string, 
+        todo_description?: string, 
         todo_priority: number, 
         todo_status: string
     };
