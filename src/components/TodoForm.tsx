@@ -103,9 +103,9 @@ function TodoForm() {
             <select name="status" id="status" value={formData.todo_status}
             onChange={(event) => setFormData({...formData, todo_status: event.target.value})} 
             >
-                <option value="ej påbörjad">Ej påbörjad</option>
-                <option value="påbörjad">Påbörjad</option>
-                <option value="avslutad">Avslutad</option>
+                <option>Ej påbörjad</option>
+                <option>Påbörjad</option>
+                <option>Avslutad</option>
             </select><br />
 
             <input type="submit" value="Lägg till" />
