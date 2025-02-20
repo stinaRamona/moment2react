@@ -14,10 +14,12 @@ interface Todo {
 }; 
 
 
+
 function TodoList() {
     //State för Todo
     const [todos, setTodo] = useState<Todo [] | []>([]); 
     const [loading, setLoading] = useState<boolean>(false); 
+    const [error, setError] = useState<string>(""); 
 
     //useEffect 
     useEffect(() => {
@@ -36,7 +38,7 @@ function TodoList() {
             setTodo(data); 
 
         } catch(error) {
-            console.log(error); 
+            setError("Gick inte att ladda in listan. Försök igen senare"); 
         } finally {
             setLoading(false); 
         }
@@ -59,6 +61,7 @@ function TodoList() {
             getTodos(); 
 
         } catch(error) {
+            setError("Det gick inte att ta bort todo. Försök igen senare")
             console.log(error); 
         }
     }
@@ -91,6 +94,7 @@ function TodoList() {
             
 
         } catch(error) {
+            setError("Gick inte att uppdatera status. Försök igen senare"); 
             console.log("något gick fel" + error); 
         }
     }
@@ -102,7 +106,7 @@ function TodoList() {
                 {loading && <i className="fa-solid fa-spinner fa-spin-pulse fa-2xl"></i>}
             </div>
             
-
+            <span id="errorMsg">{error}</span>
         {
             todos.map((todo) => (
                 <div className="todo-div" key={todo._id}>
