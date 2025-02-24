@@ -68,6 +68,9 @@ function TodoForm({ onTodoAdded } : { onTodoAdded: () => void}) {
                     throw new Error ("Kunde inte skicka datan")
                 } 
 
+                //Rensar formuläret efter lyckat POST-anrop
+                setFormData({todo_title: "", todo_description: "", todo_priority: 1, todo_status: "Ej påbörjad"})
+
                 onTodoAdded(); //istället för att ladda om sidan så anropas funktionen som hämtar in todos
             } catch(error) {
                 //konsoll test för utveckling
