@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../css/TodoForm.css"; 
 
-function TodoForm() {
+function TodoForm({ onTodoAdded } : { onTodoAdded: () => void}) {
 
     //interface för fomulär
     
@@ -68,7 +68,7 @@ function TodoForm() {
                     throw new Error ("Kunde inte skicka datan")
                 } 
 
-                location.reload(); //alternativt annan lösning. Läsa in funktion för att hämta data här? 
+                onTodoAdded(); //istället för att ladda om sidan så anropas funktionen som hämtar in todos
             } catch(error) {
                 //konsoll test för utveckling
                 console.log(error); 

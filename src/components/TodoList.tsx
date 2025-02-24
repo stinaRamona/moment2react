@@ -1,48 +1,15 @@
 //För inhämtning och utskrivning av todos 
 import "../css/TodoList.css"
-import { useState } from "react";
-import { useEffect } from "react"; 
-
-//inteface över svaret från webbtjänsten 
 
 interface Todo {
-    _id: number,
-    todo_title: string, 
-    todo_description?: string, 
-    todo_priority: number, 
-    todo_status: string
-}; 
+    _id: number;
+    todo_title: string;
+    todo_description?: string;
+    todo_priority: number;
+    todo_status: string;
+}
 
-
-
-function TodoList() {
-    //State för Todo
-    const [todos, setTodo] = useState<Todo [] | []>([]); 
-    const [loading, setLoading] = useState<boolean>(false); 
-    const [error, setError] = useState<string>(""); 
-
-    //useEffect 
-    useEffect(() => {
-        getTodos(); 
-    }, []); 
-
-    //funktion för att hämta in todos 
-    const getTodos = async () => {
-        try {
-            setLoading(true); 
-
-            const response = await fetch("https://hapitodos.onrender.com/todo"); 
-
-            const data = await response.json(); 
-
-            setTodo(data); 
-
-        } catch(error) {
-            setError("Gick inte att ladda in listan. Försök igen senare"); 
-        } finally {
-            setLoading(false); 
-        }
-    } 
+function TodoList( {todos, loading, error, onDelete} : {todos: Todo[]; loading: boolean; error: string; onDelete: () => void} ) { 
 
     //Funktion för att ta bort todo
     const deleteTodo = async (id: any) => {
@@ -58,10 +25,9 @@ function TodoList() {
                 throw new Error("Kunde inte ta bort todo")
             }
 
-            getTodos(); 
+            onDelete(); 
 
         } catch(error) {
-            setError("Det gick inte att ta bort todo. Försök igen senare")
             console.log(error); 
         }
     }
@@ -90,11 +56,10 @@ function TodoList() {
                 throw new Error("gick inte att uppdatera")
             }
 
-            getTodos(); 
+            onDelete(); 
             
 
-        } catch(error) {
-            setError("Gick inte att uppdatera status. Försök igen senare"); 
+        } catch(error) { 
             console.log("något gick fel" + error); 
         }
     }
